@@ -1,3 +1,3 @@
 # Jobify
 
- Tracking for job applications 
+Job application tracking system for job hunters

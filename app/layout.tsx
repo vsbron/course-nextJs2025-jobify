@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Jobify",
-  description: " Tracking for job applications",
+  description: "Job application tracking system for job hunters",
 };
 
 export default function RootLayout({
