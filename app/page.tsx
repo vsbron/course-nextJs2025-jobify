@@ -25,7 +25,7 @@ function Home() {
             illo amet reprehenderit! Temporibus?
           </p>
           <Button className="mt-4" asChild>
-            <Link href="/add-job">Get Started</Link>
+            <Link href="/dashboard/add-job">Get Started</Link>
           </Button>
         </div>
         <Image src={LandingImg} alt="landing" className="hidden lg:block" />
