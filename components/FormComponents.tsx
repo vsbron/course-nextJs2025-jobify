@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Control } from "react-hook-form";
 import {
   Select,
@@ -17,8 +18,13 @@ import { Input } from "./ui/input";
 
 type CustomFormFieldProps = {
   name: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<any>;
+};
+type CustomFormSelectProps = {
+  name: string;
+  control: Control<any>;
+  items: string[];
+  labelText?: string;
 };
 
 // Form field component
@@ -42,4 +48,35 @@ export function CustomFormField({ name, control }: CustomFormFieldProps) {
 }
 
 // Form select component
-export function CustomFormSelect({}) {}
+export function CustomFormSelect({
+  name,
+  control,
+  items,
+  labelText,
+}: CustomFormSelectProps) {
+  // Returned JSX
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel className="capitalize">{labelText || name}</FormLabel>
+          <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <FormControl>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+            </FormControl>
+            {items.map((item) => (
+              <SelectItem key={item} value={item}>
+                {item}
+              </SelectItem>
+            ))}
+          </Select>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
