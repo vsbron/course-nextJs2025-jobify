@@ -1,6 +1,12 @@
+import CreateJobForm from "@/components/CreateJobForm";
+
 function AddJobPage() {
   // Returned JSX
-  return <div>Add Job Page</div>;
+  return (
+    <>
+      <CreateJobForm />
+    </>
+  );
 }
 
 export default AddJobPage;

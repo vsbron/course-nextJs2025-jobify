@@ -20,7 +20,7 @@ function Sidebar() {
         {links.map(({ href, label, icon }) => (
           <Button
             key={href}
-            variant={pathname === href ? "default" : "link"}
+            variant={pathname === href ? "default" : "outline"}
             asChild
           >
             <Link href={href} className="flex items-center gap-x-2">
