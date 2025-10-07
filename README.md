@@ -10,6 +10,7 @@ Job application tracking system for job hunters
 - Clerk
 - ShadCN components
 - React Hook Form + Zod
+- Render.com database
 - Prisma
 
 ## Live version
