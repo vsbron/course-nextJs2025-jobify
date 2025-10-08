@@ -1,17 +1,15 @@
 "use client";
-import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { createJobAction } from "@/utils/actions";
 import { JobStatus, JobMode } from "@/utils/types";
 import { createAndEditJobSchema, CreateAndEditJobType } from "@/utils/schemas";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { CustomFormField, CustomFormSelect } from "./FormComponents";
+import { useAddEditJob } from "@/app/queries/useAddEditJob";
 
 function CreateJobForm() {
   // Set up the form with schemas and default values
@@ -27,25 +25,11 @@ function CreateJobForm() {
   });
 
   // Get the query client and the router
-  const queryClient = useQueryClient();
   const router = useRouter();
 
-  // Get the mutate function and pending state from React Query
-  const { mutate, isPending } = useMutation({
-    mutationFn: (values: CreateAndEditJobType) => createJobAction(values),
-    onSuccess: (data) => {
-      // Guard clause
-      if (!data) {
-        toast("There was an error");
-        return;
-      }
-      toast("job created");
-
-      // Invalidate queries
-      queryClient.invalidateQueries({ queryKey: ["jobs"] });
-      queryClient.invalidateQueries({ queryKey: ["stats"] });
-      queryClient.invalidateQueries({ queryKey: ["charts"] });
-
+  // Get the mutate function and pending state from custom hook
+  const { mutate, isPending } = useAddEditJob({
+    onSuccess: () => {
       // Redirect the user
       router.push("/jobs");
     },
