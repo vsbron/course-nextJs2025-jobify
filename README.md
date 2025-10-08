@@ -12,6 +12,7 @@ Job application tracking system for job hunters
 - React Hook Form + Zod
 - Render.com database
 - Prisma
+- React Query
 
 ## Live version
 
