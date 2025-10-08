@@ -8,8 +8,8 @@ import { createAndEditJobSchema, CreateAndEditJobType } from "@/utils/schemas";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+import { useAddEditJob } from "@/queries/useAddEditJob";
 import { CustomFormField, CustomFormSelect } from "./FormComponents";
-import { useAddEditJob } from "@/app/queries/useAddEditJob";
 
 function CreateJobForm() {
   // Set up the form with schemas and default values
