@@ -6,7 +6,7 @@ import { CreateAndEditJobType } from "@/utils/schemas";
 import { JobType } from "@/utils/types";
 
 // Query to add / edit a job
-export function useAddEditJob(options?: { onSuccess?: () => void }) {
+export function useAddJob(options?: { onSuccess?: () => void }) {
   // Getting the Query client
   const queryClient = useQueryClient();
 

@@ -8,7 +8,7 @@ import { createAndEditJobSchema, CreateAndEditJobType } from "@/utils/schemas";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { useAddEditJob } from "@/queries/useAddEditJob";
+import { useAddJob } from "@/queries/useAddJob";
 import { CustomFormField, CustomFormSelect } from "./FormComponents";
 
 function CreateJobForm() {
@@ -28,7 +28,7 @@ function CreateJobForm() {
   const router = useRouter();
 
   // Get the mutate function and pending state from custom hook
-  const { mutate, isPending } = useAddEditJob({
+  const { mutate, isPending } = useAddJob({
     onSuccess: () => {
       // Redirect the user
       router.push("/jobs");
