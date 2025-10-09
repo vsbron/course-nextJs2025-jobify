@@ -44,7 +44,7 @@ function JobCard({ job }: { job: JobType }) {
         <Button size="sm" asChild>
           <Link href={`/jobs/${id}`}>edit</Link>
         </Button>
-        <DeleteJobBtn />
+        <DeleteJobBtn id={id} />
       </CardFooter>
     </Card>
   );
