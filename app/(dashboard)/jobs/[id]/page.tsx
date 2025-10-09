@@ -7,7 +7,7 @@ import {
 import EditJobForm from "@/components/EditJobForm";
 import { getSingleJobAction } from "@/utils/actions";
 
-async function JobPage({ params }: { params: { id: string } }) {
+async function JobPage({ params }: { params: Record<string, string> }) {
   // Create the query client
   const queryClient = new QueryClient();
 
