@@ -8,25 +8,28 @@ import EditJobForm from "@/components/EditJobForm";
 import { getSingleJobAction } from "@/utils/actions";
 
 // Props type
-type JobPageProps = {
-  params: { id: string };
-};
+interface JobPageProps {
+  params: Promise<{ id: string }>;
+}
 
 // The component
 async function JobPage({ params }: JobPageProps) {
+  // Get the ID from the params
+  const { id } = await params;
+
   // Create the query client
   const queryClient = new QueryClient();
 
   // Prefetch all of the jobs
   await queryClient.prefetchQuery({
-    queryKey: ["jobs", params.id],
-    queryFn: () => getSingleJobAction(params.id),
+    queryKey: ["jobs", id],
+    queryFn: () => getSingleJobAction(id),
   });
 
   // Returned JSX
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <EditJobForm jobId={params.id} />
+      <EditJobForm jobId={id} />
     </HydrationBoundary>
   );
 }
