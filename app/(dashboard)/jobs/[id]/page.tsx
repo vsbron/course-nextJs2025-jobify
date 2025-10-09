@@ -7,7 +7,13 @@ import {
 import EditJobForm from "@/components/EditJobForm";
 import { getSingleJobAction } from "@/utils/actions";
 
-async function JobPage({ params }: { params: Record<string, string> }) {
+// Props type
+type JobPageProps = {
+  params: { id: string };
+};
+
+// The component
+async function JobPage({ params }: JobPageProps) {
   // Create the query client
   const queryClient = new QueryClient();
 
