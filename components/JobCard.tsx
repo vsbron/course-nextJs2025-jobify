@@ -19,7 +19,10 @@ import JobInfo from "./JobInfo";
 
 function JobCard({ job }: { job: JobType }) {
   // Destructure the props
-  const { id, position, company } = job;
+  const { id, position, company, createdAt, mode, location, status } = job;
+
+  // Formatting the date
+  const date = new Date(createdAt).toLocaleDateString();
 
   // Returned JSX
   return (
@@ -29,7 +32,14 @@ function JobCard({ job }: { job: JobType }) {
         <CardDescription>{company}</CardDescription>
       </CardHeader>
       <Separator />
-      <CardContent></CardContent>
+      <CardContent className="mt-4 grid grid-cols-2 gap-4">
+        <JobInfo icon={<Briefcase />} text={mode} />
+        <JobInfo icon={<MapPin />} text={location} />
+        <JobInfo icon={<CalendarDays />} text={date} />
+        <Badge className="w-32 justify-center text-white">
+          <JobInfo icon={<RadioTower className="w-4 h-4" />} text={status} />
+        </Badge>
+      </CardContent>
       <CardFooter className="flex gap-4">
         <Button size="sm" asChild>
           <Link href={`/jobs/${id}`}>edit</Link>
