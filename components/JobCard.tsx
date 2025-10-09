@@ -32,7 +32,7 @@ function JobCard({ job }: { job: JobType }) {
         <CardDescription>{company}</CardDescription>
       </CardHeader>
       <Separator />
-      <CardContent className="mt-4 grid grid-cols-2 gap-4">
+      <CardContent className="grid grid-cols-2 gap-4">
         <JobInfo icon={<Briefcase />} text={mode} />
         <JobInfo icon={<MapPin />} text={location} />
         <JobInfo icon={<CalendarDays />} text={date} />
