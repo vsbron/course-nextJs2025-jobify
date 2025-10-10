@@ -178,3 +178,41 @@ export async function updateJobAction(
     return null;
   }
 }
+
+// Get stats action function
+export async function getStatsAction(): Promise<{
+  pending: number;
+  interview: number;
+  declined: number;
+}> {
+  // Get the user ID
+  const userId = authenticateAndRedirect();
+
+  try {
+    // Get the stats from Prisma
+    const stats = await prisma.job.groupBy({
+      by: ["status"],
+      _count: { status: true },
+      where: { clerkId: userId },
+    });
+
+    // Reduce all into object
+    const statsObject = stats.reduce((acc, curr) => {
+      acc[curr.status] = curr._count.status;
+      return acc;
+    }, {} as Record<string, number>);
+
+    // Merge with default values
+    const defaultStats = {
+      pending: 0,
+      declined: 0,
+      interview: 0,
+      ...statsObject,
+    };
+    // Return the stats
+    return defaultStats;
+  } catch (err) {
+    console.log(err);
+    redirect("/jobs");
+  }
+}
