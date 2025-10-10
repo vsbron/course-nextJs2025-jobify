@@ -1,20 +1,10 @@
 "use client";
 import { useStats } from "@/queries/useStats";
-import StatsCard, { StatsLoadingCard } from "./StatsCard";
+import StatsCard from "./StatsCard";
 
 function StatsContainer() {
   // Get the stats from the custom hook
-  const { data, isPending } = useStats();
-
-  // Guard clause
-  if (isPending)
-    return (
-      <div className="grid md:grid-cols-2 gap-4 lg:grid-cols-3">
-        <StatsLoadingCard />
-        <StatsLoadingCard />
-        <StatsLoadingCard />
-      </div>
-    );
+  const { data } = useStats();
 
   // Returned JSX
   return (
