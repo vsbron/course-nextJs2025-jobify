@@ -11,6 +11,7 @@ import { useGetJob } from "@/queries/useGetJob";
 import { useEditJob } from "@/queries/useEditJob";
 import { createAndEditJobSchema, CreateAndEditJobType } from "@/utils/schemas";
 import { JobStatus, JobMode } from "@/utils/types";
+import { useEffect } from "react";
 
 function EditJobForm({ jobId }: { jobId: string }) {
   // Get the job and mutate functions
@@ -31,6 +32,19 @@ function EditJobForm({ jobId }: { jobId: string }) {
       mode: (data?.mode as JobMode) || JobMode.FullTime,
     },
   });
+
+  // Fill the fields once data is available
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        position: data.position,
+        company: data.company,
+        location: data.location,
+        status: data.status as JobStatus,
+        mode: data.mode as JobMode,
+      });
+    }
+  }, [data, form]);
 
   // Form submit handler
   const onSubmit = (values: CreateAndEditJobType) => {
