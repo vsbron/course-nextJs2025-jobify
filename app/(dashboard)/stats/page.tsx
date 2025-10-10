@@ -1,8 +1,8 @@
-import { getStatsAction } from "@/utils/actions";
+import { getStatsAction, getChartsDataAction } from "@/utils/actions";
 
 async function StatsPage() {
   // Get the stats
-  const stats = await getStatsAction();
+  const stats = await getChartsDataAction();
 
   console.log(stats);
 

@@ -216,3 +216,40 @@ export async function getStatsAction(): Promise<{
     redirect("/jobs");
   }
 }
+
+// Get the charts action function
+export async function getChartsDataAction(): Promise<
+  Array<{ date: string; count: number }>
+> {
+  // Get the user ID
+  const userId = authenticateAndRedirect();
+
+  // Set the date T minus 30 months
+  const sixMonthsAgo = dayjs().subtract(30, "month").toDate();
+
+  try {
+    // Find all jobs withing the timeframe
+    const jobs = await prisma.job.findMany({
+      where: { clerkId: userId, createdAt: { gte: sixMonthsAgo } },
+      orderBy: { createdAt: "asc" },
+    });
+
+    // Reduce all the jobs into one object
+    const applicationsPerMonth = jobs.reduce((acc, job) => {
+      const date = dayjs(job.createdAt).format("MMM YY");
+      const existingEntry = acc.find((entry) => entry.date === date);
+      if (existingEntry) {
+        existingEntry.count += 1;
+      } else {
+        acc.push({ date, count: 1 });
+      }
+      return acc;
+    }, [] as Array<{ date: string; count: number }>);
+
+    // Return the jobs
+    return applicationsPerMonth;
+  } catch (err) {
+    console.log(err);
+    redirect("/jobs");
+  }
+}
