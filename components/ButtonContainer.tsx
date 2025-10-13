@@ -21,9 +21,6 @@ function ButtonContainer({ currentPage, totalPages }: ButtonContainerProps) {
   const router = useRouter();
   const pathname = usePathname();
 
-  // Set the array of pagination buttons
-  const pageButtons = Array.from({ length: totalPages }, (_, i) => i + 1);
-
   // Page change handler
   const handlePageChange = (page: number) => {
     // Set the params based on the current url
@@ -122,12 +119,12 @@ function ButtonContainer({ currentPage, totalPages }: ButtonContainerProps) {
     <div className="flex gap-2">
       {/* Prev button */}
       <Button
-        size="icon"
         variant={currentPage === 1 ? "outline" : "default"}
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
         <ChevronLeft />
+        Prev
       </Button>
 
       {/* All buttons */}
@@ -135,11 +132,11 @@ function ButtonContainer({ currentPage, totalPages }: ButtonContainerProps) {
 
       {/* Next button */}
       <Button
-        size="icon"
         variant={currentPage === totalPages ? "outline" : "default"}
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
+        Next
         <ChevronRight />
       </Button>
     </div>
