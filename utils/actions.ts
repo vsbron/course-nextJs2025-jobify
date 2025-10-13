@@ -109,7 +109,7 @@ export async function getAllJobsAction({
     const totalPages = Math.ceil(count / limit);
 
     // Return the object
-    return { jobs, count: 0, page: 1, totalPages };
+    return { jobs, count, page, totalPages };
   } catch (err) {
     console.error(err);
     return { jobs: [], count: 0, page: 1, totalPages: 0 };
